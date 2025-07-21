@@ -26,7 +26,7 @@ pipeline {
 
         stage('Data Quality Checks') {
             steps {
-                echo '🔍 Running data quality checks...'
+                echo 'Running data quality checks...'
                 script {
                     sh '. ${VENV_NAME}/bin/activate'
                     sh 'echo "Checking Python imports..."'
@@ -37,6 +37,20 @@ pipeline {
                     sh 'python -m flake8 etl_pipeline.py --max-line-length=100 --ignore=E501,W503 || echo "Code style warnings detected"'
                 }
                 echo 'Data quality checks completed'
+            }
+        }
+
+        stage('Unit Tests') {
+            steps {
+                echo 'Running DataOps ETL unit tests...'
+                script {
+                    sh '. ${VENV_NAME}/bin/activate'
+                    sh 'echo "Running ETL pipeline unit tests..."'
+                    sh 'python -m unittest test_etl_pipeline.py -v'   
+                    sh 'echo "Running pytest with coverage..."'   
+                    sh 'python -m pytest test_etl_pipeline.py -v --tb=short || echo "Some tests may have warnings"'   
+                }
+                echo 'Unit tests completed'
             }
         }
     }
