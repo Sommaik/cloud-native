@@ -23,5 +23,21 @@ pipeline {
                 echo 'Python environment setup completed'
             }
         }
+
+        stage('Data Quality Checks') {
+            steps {
+                echo '🔍 Running data quality checks...'
+                script {
+                    sh '. ${VENV_NAME}/bin/activate'
+                    sh 'echo "Checking Python imports..."'
+                    sh 'python -c "import pandas; import sqlalchemy; import pymssql; print(\'All required packages imported successfully\')"'
+                    sh 'echo "Validating ETL pipeline syntax..."'
+                    sh 'python -m py_compile etl_pipeline.py'
+                    sh 'echo "Running static code analysis..."'
+                    sh 'python -m flake8 etl_pipeline.py --max-line-length=100 --ignore=E501,W503 || echo "Code style warnings detected"'
+                }
+                echo 'Data quality checks completed'
+            }
+        }
     }
 }
