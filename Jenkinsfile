@@ -1,6 +1,6 @@
 pipeline {
     agent {
-        docker { image 'python:slim' }
+        docker { image 'python:3.9-slim' }
     }
     environment {
         PYTHON_VERSION = '3.9'
