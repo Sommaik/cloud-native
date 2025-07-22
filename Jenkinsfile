@@ -1,7 +1,8 @@
 pipeline {
-    agent {
-        docker { image 'python:3.9-slim' }
-    }
+    // agent {
+    //     docker { image 'python:3.9-slim' }
+    // }
+    agent none
     environment {
         PYTHON_VERSION = '3.9'
         VENV_NAME = 'venv'
