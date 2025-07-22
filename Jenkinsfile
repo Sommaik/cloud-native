@@ -61,6 +61,7 @@ pipeline {
             agent any
             steps {
                 sh 'docker version'
+                sh 'docker build -t simple-test .'
             }
         }
     }
