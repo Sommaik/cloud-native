@@ -12,6 +12,7 @@ RUN apt-get update && apt-get install -y lsb-release ca-certificates curl && \
 RUN apt update
 RUN apt install python3 -y
 RUN apt install python3.11-venv -y
+RUN apt install python3-pip -y
 USER jenkins
 RUN jenkins-plugin-cli --plugins "blueocean docker-workflow json-path-api"
 USER root
