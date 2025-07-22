@@ -34,6 +34,7 @@ create database test_db;
 ### Build Agent
 
 ```
+docker compose up -d agent
 docker run -i --rm --name build --init --net=jenkins_default  python-agent java -jar /app/agent.jar -url http://jenkinsmaster:8080/  -secret 9fd60c3d196bd13c2a393c5c781a0aa3f4a7d9754a06d59fab826b51b1442769 -name python-agent -webSocket -workDir "/home/jenkins/agent"
 ```
 
