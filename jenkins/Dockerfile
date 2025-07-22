@@ -9,6 +9,9 @@ RUN apt-get update && apt-get install -y lsb-release ca-certificates curl && \
     | tee /etc/apt/sources.list.d/docker.list > /dev/null && \
     apt-get update && apt-get install -y docker-ce-cli && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN apt update
+RUN apt install python3 -y
+RUN apt install python3.11-venv -y
 USER jenkins
 RUN jenkins-plugin-cli --plugins "blueocean docker-workflow json-path-api"
 USER root
