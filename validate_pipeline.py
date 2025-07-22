@@ -6,7 +6,7 @@ try:
         'database': {
             'server': 'mssql',
             'database': 'test_db',
-            'username': 'sax',
+            'username': 'sa',
             'password': 'new#Mssql001'
         },
         'acceptable_max_null': 26,

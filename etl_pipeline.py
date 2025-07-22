@@ -10,6 +10,7 @@ Based on ETL-dev (1).py with improvements for production use
 import os
 import re
 import logging
+import sys
 import pandas as pd
 import numpy as np
 from sqlalchemy import create_engine
@@ -347,7 +348,8 @@ class DataOpsETLPipeline:
                     con=self.engine,
                     if_exists='replace',
                     index=False,
-                    method='multi'
+                    method='multi',
+                    chunksize=1000
                 )
                 logger.info(f"Loaded {table_name} with {len(df)} records")
             
@@ -357,7 +359,8 @@ class DataOpsETLPipeline:
                 con=self.engine,
                 if_exists='replace',
                 index=False,
-                method='multi'
+                method='multi',
+                chunksize=1000
             )
             logger.info(f"Loaded loans_fact with {len(fact_table)} records")
             
@@ -462,17 +465,21 @@ def main():
     # Configuration
     config = {
         'database': {
-            'server': '35.185.131.47',
-            'database': 'TestDB',
-            'username': 'SA',
-            'password': 'Passw0rd123456'
+            'server': os.environ.get("DB_SERVER", 'localhost'),
+            'database': os.environ.get("DB_NAME",'test_db'),
+            'username': os.environ.get("DB_USER",'sa'),
+            'password': os.environ.get("DB_PASSWORD",'new#Mssql001')
         },
         'acceptable_max_null': 26,
         'missing_threshold': 30.0
     }
     
     # Input file path - update this as needed
-    input_file = 'LoanStats_web_14422.csv'
+    # input_file = 'LoanStats_web_14422.csv'
+    input_file = './examples/sample_data/test_data.csv'
+    if len(sys.argv) > 1:
+        print(f"Load data from file {sys.argv[1]}")
+        input_file = sys.argv[1]
     
     if not os.path.exists(input_file):
         logger.error(f"Input file not found: {input_file}")

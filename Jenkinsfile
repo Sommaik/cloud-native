@@ -56,5 +56,15 @@ pipeline {
                 sh 'python validate_pipeline.py'
             }
         }
+
+        stage('Build docker image') {
+            agent {
+                docker { image 'docker:dind' }
+            }
+            steps {
+                echo 'Build docker image'
+                sh 'docker build -t test .'
+            }
+        }
     }
 }

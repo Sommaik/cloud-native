@@ -27,5 +27,10 @@ url: http://localhost:8978
 
 ```
 create database test_db;
-CREATE LOGIN test_user WITH PASSWORD = 'new#Testuser001';
+```
+
+### Run docker
+
+```
+docker run --rm  -v $(pwd)/examples/sample_data:/data -e DB_SERVER=mssql --net=jenkins_default test /data/test_data.csv
 ```
