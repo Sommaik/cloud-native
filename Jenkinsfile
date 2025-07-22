@@ -61,6 +61,7 @@ pipeline {
             }
         }
         stage("Package") {
+            agent any
             steps {
                 withCredentials(
                 [usernamePassword(
