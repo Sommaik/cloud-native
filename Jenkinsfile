@@ -58,9 +58,9 @@ pipeline {
         }
 
         stage('Build docker image') {
+            def customImage = docker.build("my-image:${env.BUILD_ID}")
             steps {
                 echo 'Build docker image'
-                def customImage = docker.build("my-image:${env.BUILD_ID}")
             }
         }
     }
