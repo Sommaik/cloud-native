@@ -58,10 +58,9 @@ pipeline {
         }
 
         stage('Build docker image') {
-            agent any
             steps {
                 echo 'Build docker image'
-                sh 'docker build -t test .'
+                def customImage = docker.build("my-image:${env.BUILD_ID}")
             }
         }
     }
