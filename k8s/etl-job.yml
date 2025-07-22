@@ -1,0 +1,13 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: etl
+spec:
+  template:
+    spec:
+      containers:
+      - name: etl
+        image: ghcr.io/sommaik/etl
+        command: ["/data/test_data.csv"]
+      restartPolicy: Never
+  backoffLimit: 4
