@@ -1,11 +1,7 @@
 pipeline {
-    // agent {
-    //     docker { image 'python:3.9-slim'}
-    // }
     agent {
         label 'python-agent'
     }
-    // agent any
     environment {
         PYTHON_VERSION = '3.9'
         VENV_NAME = 'venv'
@@ -62,8 +58,9 @@ pipeline {
         }
 
         stage('Build docker image') {
+            agent any
             steps {
-                sh 'python -V'
+                sh 'docker version'
             }
         }
     }
