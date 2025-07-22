@@ -2,7 +2,7 @@ pipeline {
     // agent {
     //     docker { image 'python:3.9-slim' }
     // }
-    agent none
+    agent any
     environment {
         PYTHON_VERSION = '3.9'
         VENV_NAME = 'venv'
@@ -14,9 +14,6 @@ pipeline {
     }
     stages {
         stage('Setup Python Environment') {
-            agent {
-                docker { image 'python:3.9-slim' }
-            }
             steps {
                 echo 'Setting up Python virtual environment for DataOps...'
                 sh 'pwd'
