@@ -12,7 +12,7 @@ try:
         'acceptable_max_null': 26,
         'missing_threshold': 30.0
     }
-    
+    etl = DataOpsETLPipeline(config)
     print('Testing ETL pipeline class initialization...')
     print('ETL pipeline validation passed')
     
