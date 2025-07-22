@@ -18,7 +18,7 @@ pipeline {
                 echo 'Setting up Python virtual environment for DataOps...'
                 sh 'pwd'
                 sh 'python3 -m venv ${VENV_NAME}'
-                sh '. ${VENV_NAME}/bin/activate'
+                sh 'source ${VENV_NAME}/bin/activate'
                 sh 'pip install --upgrade pip --timeout=120'
                 sh 'pip install -r requirements.txt --timeout=300'
                 echo 'Python environment setup completed'
