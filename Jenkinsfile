@@ -58,7 +58,9 @@ pipeline {
         }
 
         stage('Build docker image') {
-            agent none
+            agent {
+                label 'build-in'
+            }
             steps {
                 sh 'docker version'
             }
