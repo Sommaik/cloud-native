@@ -58,7 +58,7 @@ services:
       - dbeaver_data:/opt/cloudbeaver/workspace
     ports:
       - 8978:8978
-
+      
 volumes:
   jenkins_home:
   mssql_data:
