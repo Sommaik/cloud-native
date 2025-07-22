@@ -3,13 +3,8 @@ pipeline {
         label 'python-agent'
     }
     environment {
-        PYTHON_VERSION = '3.9'
         VENV_NAME = 'venv'
-        PROJECT_NAME = 'dataops-foundation'
-        DB_SERVER = 'mssql'
-        DB_NAME = 'test_db'
-        DB_USERNAME = 'sa'
-        LOG_LEVEL = 'INFO'
+        IMAGE_NAME = 'ghcr.io/sommaik/etl'
     }
     stages {
         stage('Setup Python Environment') {
@@ -61,7 +56,25 @@ pipeline {
             agent any
             steps {
                 sh 'docker version'
-                sh 'docker build -t simple-test .'
+                sh "docker build -t ${IMAGE_NAME} ."
+                sh "docker tag ${IMAGE_NAME} ${IMAGE_NAME}:1.0.${BUILD_NUMBER}"
+            }
+        }
+        stage("Package") {
+            steps {
+                withCredentials(
+                [usernamePassword(
+                    credentialsId: 'github-id',
+                    passwordVariable: 'gitPassword',
+                    usernameVariable: 'gitUser'
+                )]
+            ){
+                sh "docker login -u ${env.gitUser} -p ${env.gitPassword} ghcr.io"
+                sh "docker push ${env.IMAGE_NAME}:${env.BUILD_NUMBER}"
+                sh "docker push ${env.IMAGE_NAME}"
+                sh "docker rmi ${env.IMAGE_NAME}:${env.BUILD_NUMBER}"
+                sh "docker rmi ${env.IMAGE_NAME}"
+            }
             }
         }
     }

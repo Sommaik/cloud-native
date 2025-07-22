@@ -58,7 +58,12 @@ services:
       - dbeaver_data:/opt/cloudbeaver/workspace
     ports:
       - 8978:8978
-      
+  agent:
+    build:
+      context: .
+      dockerfile: Dockerfile.python-agent
+    command: java -jar /app/agent.jar -url http://jenkinsmaster:8080/  -secret 9fd60c3d196bd13c2a393c5c781a0aa3f4a7d9754a06d59fab826b51b1442769 -name python-agent -webSocket -workDir "/home/jenkins/agent"
+
 volumes:
   jenkins_home:
   mssql_data:
