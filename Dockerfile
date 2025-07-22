@@ -1,6 +1,5 @@
 FROM python:3.9-slim
 
-# Upgrade system packages to reduce vulnerabilities
 RUN apt-get update && apt-get upgrade -y && apt-get clean
 
 WORKDIR /app
