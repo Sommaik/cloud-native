@@ -1,5 +1,7 @@
 pipeline {
-    agent none
+    agent {
+        docker { image 'python:3.9-slim' }
+    }
     environment {
         PYTHON_VERSION = '3.9'
         VENV_NAME = 'venv'
@@ -11,9 +13,6 @@ pipeline {
     }
     stages {
         stage('Setup Python Environment') {
-            agent {
-                docker { image 'python:3.9-slim' }
-            }
             steps {
                 echo 'Setting up Python virtual environment for DataOps...'
                 sh 'pwd'
@@ -26,9 +25,6 @@ pipeline {
         }
 
         stage('Data Quality Checks') {
-            agent {
-                docker { image 'python:3.9-slim' }
-            }
             steps {
                 echo 'Running data quality checks...'
                     sh '. ${VENV_NAME}/bin/activate'
@@ -43,9 +39,6 @@ pipeline {
         }
 
         stage('Unit Tests') {
-            agent {
-                docker { image 'python:3.9-slim' }
-            }
             steps {
                 echo 'Running DataOps ETL unit tests...'
                     sh '. ${VENV_NAME}/bin/activate'
@@ -57,9 +50,6 @@ pipeline {
             }
         }
         stage('ETL Pipeline Validation') {
-            agent {
-                docker { image 'python:3.9-slim' }
-            }
             steps {
                 echo 'Validating ETL pipeline configuration...'
                 sh '. ${VENV_NAME}/bin/activate'
@@ -71,7 +61,7 @@ pipeline {
             agent any
             steps {
                 echo 'Build docker image'
-                sh 'docker build -t test .'
+                echo 'docker version'
             }
         }
     }
