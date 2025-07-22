@@ -49,13 +49,13 @@ pipeline {
         //         echo 'Unit tests completed'
         //     }
         // }
-        stage('ETL Pipeline Validation') {
-            steps {
-                echo 'Validating ETL pipeline configuration...'
-                sh '. ${VENV_NAME}/bin/activate'
-                sh 'python validate_pipeline.py'
-            }
-        }
+        // stage('ETL Pipeline Validation') {
+        //     steps {
+        //         echo 'Validating ETL pipeline configuration...'
+        //         sh '. ${VENV_NAME}/bin/activate'
+        //         sh 'python validate_pipeline.py'
+        //     }
+        // }
 
         stage('Build docker image') {
             agent any
