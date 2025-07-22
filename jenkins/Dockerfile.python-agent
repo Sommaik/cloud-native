@@ -1,9 +1,8 @@
-FROM jenkins/agent:latest
-USER root
-RUN apt-get update && \
-    apt-get install -y python3-full && \
-    rm -rf /var/lib/apt/lists/*
-# RUN update-alternatives --install /usr/bin/python python /usr/bin/python3 100 && \
-#     update-alternatives --install /usr/bin/pip pip /usr/bin/pip3 100
-
-USER jenkins
+# Use the official Python 3.9 slim image as a base
+FROM python:3.9-slim
+RUN apt update
+RUN apt upgrade -y
+RUN apt install default-jre -y
+WORKDIR /app
+COPY agent.jar .
+RUN java --version
