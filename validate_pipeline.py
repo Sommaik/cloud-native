@@ -5,8 +5,8 @@ try:
     config = {
         'database': {
             'server': 'mssql',
-            'database': 'test_dbxxxx',
-            'username': 'sa',
+            'database': 'test_db',
+            'username': 'sax',
             'password': 'new#Mssql001'
         },
         'acceptable_max_null': 26,
