@@ -71,9 +71,9 @@ pipeline {
                 )]
             ){
                 sh "docker login -u ${env.gitUser} -p ${env.gitPassword} ghcr.io"
-                sh "docker push ${env.IMAGE_NAME}:${env.BUILD_NUMBER}"
+                sh "docker push ${env.IMAGE_NAME}:1.0.${env.BUILD_NUMBER}"
                 sh "docker push ${env.IMAGE_NAME}"
-                sh "docker rmi ${env.IMAGE_NAME}:${env.BUILD_NUMBER}"
+                sh "docker rmi ${env.IMAGE_NAME}:1.0.${env.BUILD_NUMBER}"
                 sh "docker rmi ${env.IMAGE_NAME}"
             }
             }
