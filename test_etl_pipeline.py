@@ -23,10 +23,10 @@ class TestDataOpsETLPipeline(unittest.TestCase):
         # Mock configuration
         self.config = {
             'database': {
-                'server': 'test_server',
+                'server': 'mssql',
                 'database': 'test_db',
-                'username': 'test_user',
-                'password': 'test_pass'
+                'username': 'sa',
+                'password': 'new#Mssql001'
             },
             'acceptable_max_null': 5,
             'missing_threshold': 20.0

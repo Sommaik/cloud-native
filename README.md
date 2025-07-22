@@ -18,3 +18,14 @@ url : http://localhost:8080
 ```
 docker compose logs
 ```
+
+### Create database for test
+
+```
+url: http://localhost:8978
+```
+
+```
+create database test_db;
+CREATE LOGIN test_user WITH PASSWORD = 'new#Testuser001';
+```
