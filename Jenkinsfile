@@ -58,9 +58,7 @@ pipeline {
         }
 
         stage('Build docker image') {
-            agent {
-                docker { image 'docker:dind' }
-            }
+            agent none
             steps {
                 echo 'Build docker image'
                 sh 'docker build -t test .'

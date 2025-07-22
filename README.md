@@ -11,6 +11,7 @@ docker compose up -d
 
 ```
 url : http://localhost:8080
+user admin / admin
 ```
 
 ### Get Jenkins Initial secret
@@ -23,6 +24,7 @@ docker compose logs
 
 ```
 url: http://localhost:8978
+user cbadmin / N01cbadmin
 ```
 
 ```
