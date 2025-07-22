@@ -58,18 +58,14 @@ pipeline {
         // }
 
         stage('Build docker image') {
-            agent any
-            steps {
-                script {
-                    node('build') {
-                        // checkout scm
-                        def customImage = docker.build("my-image:${env.BUILD_ID}")
-                        // customImage.push()
-                        // customImage.push('latest')
-                    }
+            agent {
+                docker { 
+                    image 'docker:dind' 
                 }
             }
-
+            steps {
+                sh 'docker version'
+            }
         }
     }
 }
