@@ -62,7 +62,7 @@ pipeline {
                 label 'build-in'
             }
             steps {
-                sh 'docker version'
+                sh 'python -V'
             }
         }
     }
