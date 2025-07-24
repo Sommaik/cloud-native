@@ -58,3 +58,8 @@ url = https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scan
 
 subfolder = sonar-scanner-7.1.0.4889-linux-x64
 ```
+
+### ZAP Scan
+```
+docker run -t zaproxy/zap-stable zap-full-scan.py -t http://host.docker.internal:3000
+```
