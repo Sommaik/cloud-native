@@ -50,3 +50,11 @@ docker run --rm  -v $(pwd)/examples/sample_data:/data -e DB_SERVER=mssql --net=j
 http://localhost:9000
 user admin /  N01#sonarqube
 ```
+
+### Sonar Scanner
+
+```
+url = https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-7.1.0.4889-linux-x64.zip
+
+subfolder = sonar-scanner-7.1.0.4889-linux-x64
+```
