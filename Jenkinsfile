@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         APP_NAME = "test app name"
-        IMAGE_NAME = "<registry-server>/hello"
+        IMAGE_NAME = "registry.gitlab.com/sommai.k/imc-devops-07/hello"
         NAMESPACE = "default"
     }
     stages {
@@ -18,7 +18,7 @@ pipeline {
             steps {
                 withCredentials(
                 [usernamePassword(
-                    credentialsId: '<credential-id จากขั้นตอนการสร้าง credential id>',
+                    credentialsId: 'gitlab-id',
                     passwordVariable: 'gitlabPassword',
                     usernameVariable: 'gitlabUser'
                 )])

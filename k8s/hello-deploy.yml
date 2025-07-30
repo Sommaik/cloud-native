@@ -1,14 +1,14 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: <insert-namespace-name-here>
+  name: hello
 
 ---
 
 apiVersion: v1
 kind: Secret
 metadata:
-  namespace: <name-space>
+  namespace: hello
   name: regcred
 type: kubernetes.io/dockerconfigjson
 data:
@@ -19,7 +19,7 @@ data:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: <name-space>
+  namespace: hello
   name: hello
 spec:
   replicas: 1
@@ -33,7 +33,7 @@ spec:
     spec:
       containers:
         - name: hello
-          image: <your-image-name>
+          image: registry.gitlab.com/sommai.k/imc-devops-07/hello
           ports:
             - containerPort: 80
       imagePullSecrets:
@@ -42,7 +42,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  namespace: <name-space>
+  namespace: hello
   name: hello
 spec:
   selector:
@@ -56,7 +56,7 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  namespace: <name-space>
+  namespace: hello
   name: http-ingress
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /$2
@@ -65,7 +65,7 @@ spec:
   rules:
     - http:
         paths:
-          - path: /<your-path>(/|$)(.*)
+          - path: /hello(/|$)(.*)
             pathType: ImplementationSpecific
             backend:
               service:
