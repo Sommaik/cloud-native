@@ -13,7 +13,7 @@ metadata:
 type: kubernetes.io/dockerconfigjson
 data:
   .dockerconfigjson: >-
-    <base64>
+    ewogICJhdXRocyI6ewogICAgInJlZ2lzdHJ5LmdpdGxhYi5jb20iOnsKICAgICAgInVzZXJuYW1lIjoic29tbWFpLmtAZ21haWwuY29tIiwKICAgICAgInBhc3N3b3JkIjoibmV3UG5QIzIwMDMiLAogICAgICAiZW1haWwiOiJzb21tYWkua0BnbWFpbC5jb20iCiAgICB9CiAgfQp9
 
 ---
 apiVersion: apps/v1
