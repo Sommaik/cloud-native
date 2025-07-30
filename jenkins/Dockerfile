@@ -10,10 +10,7 @@ RUN apt-get update && apt-get install -y lsb-release ca-certificates curl && \
     apt-get update && apt-get install -y docker-ce-cli && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 RUN apt-get update && apt-get install -y apt-transport-https ca-certificates curl gnupg
-RUN curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.29/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
-RUN echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.29/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
-RUN apt-get update
-RUN apt-get install -y kubectl
+RUN curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
 USER jenkins
 RUN jenkins-plugin-cli --plugins "blueocean docker-workflow json-path-api pipeline-stage-view sonar build-monitor-plugin"
 USER root
