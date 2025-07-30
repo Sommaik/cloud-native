@@ -1,9 +1,0 @@
-# Use the official Python 3.9 slim image as a base
-FROM python:3.9-slim
-RUN apt update
-RUN apt upgrade -y
-RUN apt install default-jre -y
-RUN apt install git -y
-WORKDIR /app
-COPY agent.jar .
-RUN java --version

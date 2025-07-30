@@ -12,18 +12,6 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     privileged: true
   
-  mssql:
-    container_name: sql-server
-    image: mcr.microsoft.com/mssql/server:2022-latest
-    restart: always
-    environment:
-      ACCEPT_EULA: "Y"
-      SA_PASSWORD: "new#Mssql001"
-    ports:
-      - 1433:1433
-    volumes:
-      - mssql_data:/var/opt/mssql
-  
   sonarqube:
     image: sonarqube:community
     restart: always
@@ -51,23 +39,9 @@ services:
     volumes:
       - sonar_db:/var/lib/postgresql
       - sonar_db_data:/var/lib/postgresql/data
-  dbeaver:
-    image: dbeaver/cloudbeaver
-    restart: always
-    volumes:
-      - dbeaver_data:/opt/cloudbeaver/workspace
-    ports:
-      - 8978:8978
-
-  # agent:
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile.python-agent
-  #   command: java -jar /app/agent.jar -url http://jenkinsmaster:8080/  -secret 9fd60c3d196bd13c2a393c5c781a0aa3f4a7d9754a06d59fab826b51b1442769 -name python-agent -webSocket -workDir "/home/jenkins/agent"
 
 volumes:
   jenkins_home:
-  mssql_data:
   sonarqube_conf:
   sonarqube_data:
   sonarqube_extensions:
@@ -75,4 +49,3 @@ volumes:
   sonarqube_temp:
   sonar_db:
   sonar_db_data:
-  dbeaver_data:
