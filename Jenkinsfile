@@ -3,6 +3,7 @@ pipeline {
     environment {
         APP_NAME = "test app name"
         IMAGE_NAME = "<registry-server>/hello"
+        NAMESPACE = "default"
     }
     stages {
         stage("Build Image") {
@@ -34,13 +35,15 @@ pipeline {
 
         stage("Deploy") {
             steps {
-                script {
-                    try {
-                    sh "kubectl set image deployment/hello -n <name space> hello=${IMAGE_NAME}:1.0.${BUILD_NUMBER}"
-                    sh "echo update service"
-                    } catch (e){
-                    sh "kubectl apply -f k8s/hello-deploy.yml"
-                    sh "echo create service"
+                withKubeConfig([credentialsId: 'minikube-cred', serverUrl: 'https://minikube:8443']){
+                    script {
+                        try {
+                        sh "kubectl set image deployment/hello -n ${NAMESPACE} hello=${IMAGE_NAME}:1.0.${BUILD_NUMBER}"
+                        sh "echo update service"
+                        } catch (e){
+                        sh "kubectl apply -f k8s/hello-deploy.yml"
+                        sh "echo create service"
+                        }
                     }
                 }
             }
