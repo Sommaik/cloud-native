@@ -60,6 +60,23 @@ subfolder = sonar-scanner-7.1.0.4889-linux-x64
 ```
 
 ### ZAP Scan
+
 ```
 docker run -t zaproxy/zap-stable zap-full-scan.py -t http://host.docker.internal:3000
+```
+
+### Video
+
+```
+microservice = https://www.youtube.com/watch?v=5miqqkU4R9M
+
+cloud native = https://www.youtube.com/watch?v=agj7HoFQjSQ
+
+DevOps = https://www.youtube.com/watch?v=nrOubzo97jo
+
+หลักสูตร microservice = https://n9.cl/8z47be
+
+หลักสูตร cloud native = https://n9.cl/23vpy
+
+หลักสูตร devops = https://n9.cl/0wzn1
 ```

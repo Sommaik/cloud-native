@@ -4,17 +4,6 @@ metadata:
   name: hello
 
 ---
-
-apiVersion: v1
-kind: Secret
-metadata:
-  namespace: hello
-  name: regcred
-type: kubernetes.io/dockerconfigjson
-data:
-  .dockerconfigjson: >-
-
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -35,8 +24,6 @@ spec:
           image: registry.gitlab.com/sommai.k/imc-devops-07/hello
           ports:
             - containerPort: 80
-      imagePullSecrets:
-        - name: regcred
 ---
 apiVersion: v1
 kind: Service
